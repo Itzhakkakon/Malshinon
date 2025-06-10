@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Malshinon.Database.Services;
 
 namespace Malshinon.Features
@@ -11,27 +12,32 @@ namespace Malshinon.Features
     {
         public static int Start()
         {
-            string Name;
-            string Code;
-            while (true)
+            int id;
+            string name,codeName;
+            do
             {
                 Console.WriteLine("Enter your name:");
-                string name = Console.ReadLine();
+                name = Console.ReadLine();
+
+            } while (string.IsNullOrWhiteSpace(name));
+
+            do
+            {
                 Console.WriteLine("Enter your codename:");
-                string codName = Console.ReadLine();
-                var exists = AgentServices.ExistingSearch(name, codName);
-                if (exists)
-                {
-                    Name = name;
-                    Code = codName;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Agent not found, please try again.");
-                }
+                codeName = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(codeName));
+
+            var exists = AgentServices.ExistingSearch(name, codeName);
+            if (exists)
+            {
+                id = AgentServices.ReturnId(name, codeName);
             }
-            return AgentServices.ReturnId(Name, Code);
+            else
+            {
+                Console.WriteLine("Agent not found, please try again.");
+                id = -1;
+            }
+            return id;
         }
 
     }

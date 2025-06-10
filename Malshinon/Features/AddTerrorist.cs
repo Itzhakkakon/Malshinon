@@ -13,14 +13,16 @@ namespace Malshinon.Features
         {
             string Name;
             string Code;
-            Console.WriteLine("Enter name terrorist:");
-            string name = Console.ReadLine();
-            Console.WriteLine("Enter codename terrorist:");
-            string codName = Console.ReadLine();
-            TerroristServices.AddTerrorist(name, codName);
-            Name = name;
-            Code = codName;
-
+            do
+            {
+                Console.WriteLine("Enter name terrorist:");
+                string name = Console.ReadLine();
+                Console.WriteLine("Enter codename terrorist:");
+                string codName = Console.ReadLine();
+                TerroristServices.AddTerrorist(name, codName);
+                Name = name;
+                Code = codName;
+            } while (string.IsNullOrWhiteSpace(Name) && string.IsNullOrWhiteSpace(Code));
             return TerroristServices.ReturnId(Name, Code);
         }
     }

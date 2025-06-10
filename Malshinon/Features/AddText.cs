@@ -13,9 +13,12 @@ namespace Malshinon.Features
         public static string Start()
         {
             string Text;
-            Console.WriteLine("Enter your message:");
-            string text = Console.ReadLine();
-            Text = text;
+            do
+            {
+                Console.WriteLine("Enter your message:");
+                string text = Console.ReadLine();
+                Text = text;
+            } while (string.IsNullOrWhiteSpace(Text));
             return Text;
         }
     }
