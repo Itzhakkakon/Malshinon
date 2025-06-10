@@ -13,30 +13,32 @@ namespace Malshinon.Features
         public static int Start()
         {
             int id;
-            string name,codeName;
-            do
-            {
-                Console.WriteLine("Enter your name:");
-                name = Console.ReadLine();
+            do { 
+                string name, codeName;
+                do
+                {
+                    Console.WriteLine("Enter your name:");
+                    name = Console.ReadLine();
 
-            } while (string.IsNullOrWhiteSpace(name));
+                } while (string.IsNullOrWhiteSpace(name));
 
-            do
-            {
-                Console.WriteLine("Enter your codename:");
-                codeName = Console.ReadLine();
-            } while (string.IsNullOrWhiteSpace(codeName));
+                do
+                {
+                    Console.WriteLine("Enter your codename:");
+                    codeName = Console.ReadLine();
+                } while (string.IsNullOrWhiteSpace(codeName));
 
-            var exists = AgentServices.ExistingSearch(name, codeName);
-            if (exists)
-            {
-                id = AgentServices.ReturnId(name, codeName);
-            }
-            else
-            {
-                Console.WriteLine("Agent not found, please try again.");
-                id = -1;
-            }
+                var exists = AgentServices.ExistingSearch(name, codeName);
+                if (exists)
+                {
+                    id = AgentServices.ReturnId(name, codeName);
+                }
+                else
+                {
+                    Console.WriteLine("Agent not found, please try again.");
+                    id = -1;
+                }
+            } while (id == -1);
             return id;
         }
 
